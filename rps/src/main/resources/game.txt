@@ -1,0 +1,7 @@
+#GAME_VARIANT
+Jaki wariant gry chcesz wybrać ?
+
+#PLAYER_CHOICE
+Twój wybór:
+
+#ENDFILE

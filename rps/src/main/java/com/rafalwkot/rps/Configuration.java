@@ -17,7 +17,7 @@ public class Configuration {
     }
 
     String getDescription() {
-        return loadConfiguration.getText(fileName, "#ABOUT");
+        return loadConfiguration.getText(fileName, "#ABOUT_BATTLE");
     }
 
     public List<Scheme> getPossibleMoves() {

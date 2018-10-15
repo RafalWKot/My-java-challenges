@@ -14,7 +14,7 @@ Witaj w naszej grze,
 Chcesz zagrać? Tak?
 No to zaczynamy :)
 
-"#ASK_FOR_REPLAY"
+#ASK_FOR_REPLAY
 Czy chesz zagrać jeszcze raz?
 Jeśli tak naciśnij "1", jeśli nie naciśnij "2"
 

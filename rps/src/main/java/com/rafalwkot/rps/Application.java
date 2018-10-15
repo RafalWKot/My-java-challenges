@@ -27,8 +27,17 @@ public class Application {
         configurations.add(new Configuration(RPSTEXTS));
         configurations.add(new Configuration(RPSSLTEXTS));
 
+        boolean endGameCondition = true;
+        while (endGameCondition) {
+            Game game = new Game(configurations);
+            game.play();
+
+            System.out.println(loadConfiguration.getText(INTRODUCEFILE, "#ASK_FOR_REPLAY"));
+            if (scanner.nextInt() == 2) {
+                endGameCondition = false;
+            }
+        }
+        System.out.println(loadConfiguration.getText(INTRODUCEFILE, "#GOODBYE"));
     }
-
-
 }
 
