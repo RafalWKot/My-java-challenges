@@ -29,7 +29,7 @@ public class Application {
 
         boolean endGameCondition = true;
         while (endGameCondition) {
-            Game game = new Game(configurations);
+            Game game = new Game(configurations, loadConfiguration);
             game.play();
 
             System.out.println(loadConfiguration.getText(INTRODUCEFILE, "#ASK_FOR_REPLAY"));

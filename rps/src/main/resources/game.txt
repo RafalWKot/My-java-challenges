@@ -4,4 +4,8 @@ Jaki wariant gry chcesz wybrać ?
 #PLAYER_CHOICE
 Twój wybór:
 
+#QUANTITY_ROUNDS
+Wprowadź liczbę rund:
+
+
 #ENDFILE

@@ -33,7 +33,7 @@ public class LoadConfiguration {
         }
     }
 
-    public List<Scheme> getSchema(String fileName) {
+    public List<Scheme> getScheme(String fileName) {
         Scanner scanner = null;
         try {
             scanner = new Scanner(getFile(fileName));

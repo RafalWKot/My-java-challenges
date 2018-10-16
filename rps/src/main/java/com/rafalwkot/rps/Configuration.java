@@ -21,6 +21,6 @@ public class Configuration {
     }
 
     public List<Scheme> getPossibleMoves() {
-        return loadConfiguration.getSchema(fileName);
+        return loadConfiguration.getScheme(fileName);
     }
 }

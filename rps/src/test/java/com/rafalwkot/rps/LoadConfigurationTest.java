@@ -27,7 +27,7 @@ public class LoadConfigurationTest {
         LoadConfiguration loadConfiguration = new LoadConfiguration();
 
         //When
-        List<Scheme> schemes = loadConfiguration.getSchema(Application.RPSTEXTS);
+        List<Scheme> schemes = loadConfiguration.getScheme(Application.RPSTEXTS);
 
         //Then
         Assert.assertEquals(3, schemes.size());
@@ -42,7 +42,7 @@ public class LoadConfigurationTest {
         LoadConfiguration loadConfiguration = new LoadConfiguration();
 
         //When
-        List<Scheme> schemes = loadConfiguration.getSchema(Application.RPSSLTEXTS);
+        List<Scheme> schemes = loadConfiguration.getScheme(Application.RPSSLTEXTS);
 
         //Then
         Assert.assertEquals(5, schemes.size());
