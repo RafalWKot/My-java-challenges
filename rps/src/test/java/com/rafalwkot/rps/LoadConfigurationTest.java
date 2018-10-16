@@ -11,11 +11,9 @@ public class LoadConfigurationTest {
     public void testGetTextFromRPS() {
 
         //Given
-        LoadConfiguration loadConfiguration = new LoadConfiguration();
 
         //When
-        String newLine = loadConfiguration.getText(Application.INTRODUCEFILE, "#GAME_NAME");
-
+        String newLine = LoadConfiguration.getText(Application.INTRODUCEFILE, "#GAME_NAME");
         //Then
         Assert.assertEquals("Game: RPSSL 1.0", newLine);
     }
@@ -24,10 +22,9 @@ public class LoadConfigurationTest {
     public void testGetSchemaFromRPS() {
 
         //Given
-        LoadConfiguration loadConfiguration = new LoadConfiguration();
 
         //When
-        List<Scheme> schemes = loadConfiguration.getScheme(Application.RPSTEXTS);
+        List<Scheme> schemes = LoadConfiguration.getScheme(Application.RPSTEXTS);
 
         //Then
         Assert.assertEquals(3, schemes.size());
@@ -39,10 +36,9 @@ public class LoadConfigurationTest {
     public void testGetSchemaFromRPSSL() {
 
         //Given
-        LoadConfiguration loadConfiguration = new LoadConfiguration();
 
         //When
-        List<Scheme> schemes = loadConfiguration.getScheme(Application.RPSSLTEXTS);
+        List<Scheme> schemes = LoadConfiguration.getScheme(Application.RPSSLTEXTS);
 
         //Then
         Assert.assertEquals(5, schemes.size());
