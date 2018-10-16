@@ -12,7 +12,7 @@ public class LoadConfiguration {
     private static final String EMPTY = "";
 
 
-    public String getText(String fileName, String text) {
+    public static String getText(String fileName, String text) {
         Scanner scanner = null;
         try {
             scanner = new Scanner(getFile(fileName));
@@ -33,7 +33,7 @@ public class LoadConfiguration {
         }
     }
 
-    public List<Scheme> getScheme(String fileName) {
+    public static List<Scheme> getScheme(String fileName) {
         Scanner scanner = null;
         try {
             scanner = new Scanner(getFile(fileName));
@@ -60,7 +60,7 @@ public class LoadConfiguration {
         return schemes;
     }
 
-    private void addMoves(Scanner scanner, Set<Move> winMoves, String win) {
+    private static void addMoves(Scanner scanner, Set<Move> winMoves, String win) {
         String line;
         String lineWin = scanner.nextLine();
         if (lineWin.equals(win)) {
@@ -72,7 +72,7 @@ public class LoadConfiguration {
         }
     }
 
-    private Move getMove(String move) {
+    private static Move getMove(String move) {
         switch (move) {
             case "Kamień":
                 return Move.ROCK;
@@ -89,8 +89,8 @@ public class LoadConfiguration {
         }
     }
 
-    private File getFile(String fileName) {
-        ClassLoader classLoader = getClass().getClassLoader();
+    private static File getFile(String fileName) {
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         return new File(Objects.requireNonNull(classLoader.getResource(fileName)).getFile());
     }
 }

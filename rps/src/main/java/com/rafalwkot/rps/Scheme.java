@@ -4,18 +4,18 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Scheme {
-    private final Move moveName;
+    private final Move move;
     private final Set<Move> winWith;
     private final Set<Move> loseWith;
 
-    public Scheme(Move moveName, Set<Move> winWith, Set<Move> loseWith) {
-        this.moveName = moveName;
+    public Scheme(Move move, Set<Move> winWith, Set<Move> loseWith) {
+        this.move = move;
         this.winWith = winWith;
         this.loseWith = loseWith;
     }
 
-    public Move getMoveName() {
-        return moveName;
+    public Move getMove() {
+        return move;
     }
 
     public Set<Move> getWinWith() {
@@ -31,7 +31,7 @@ public class Scheme {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Scheme scheme = (Scheme) o;
-        return moveName == scheme.moveName &&
+        return move == scheme.move &&
                 Objects.equals(winWith, scheme.winWith) &&
                 Objects.equals(loseWith, scheme.loseWith);
     }
@@ -39,6 +39,6 @@ public class Scheme {
     @Override
     public int hashCode() {
 
-        return Objects.hash(moveName, winWith, loseWith);
+        return Objects.hash(move, winWith, loseWith);
     }
 }
