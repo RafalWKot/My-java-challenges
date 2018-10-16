@@ -7,5 +7,28 @@ Twój wybór:
 #QUANTITY_ROUNDS
 Wprowadź liczbę rund:
 
+#NO_ROUND
+Runda numer:
+
+#CURRENT_RESULT
+Bieżący wynik -->
+
+#END_RESULT
+Ostateczny wynik -->
+
+#CONGRATULATIONS
+Gratuluje zwycięstwa !!!
+
+#DEFEAT
+Niestety nie wygrałeś. Nie martw się następnym razem będzie lepiej.
+
+#SYMBOL
+Wybierz symbol:
+
+#PLAYER_SYMBOL
+Twój symbol :
+
+#RESULT
+Wynik:
 
 #ENDFILE
