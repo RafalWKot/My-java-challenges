@@ -33,8 +33,7 @@ public class Duel {
 
     private void addQuantityOfRounds() {
         System.out.println(LoadText.getText(Application.GAMEFILE, "#QUANTITY_ROUNDS"));
-        Scanner scanner = new Scanner(System.in);
-        quantityOfRounds = scanner.nextInt();
+        quantityOfRounds = Application.INPUT.nextInt();
     }
 
     private void addPoint(Result result) {

@@ -61,4 +61,7 @@ Wynik:
 Czy chcesz wyświetlić historię?
 Jeśli tak naciśnij "1", jeśli nie naciśnij dowolny klawisz
 
+#ECEPTION_MESSAGE
+You chose wrong number. Try again.
+
 #ENDFILE

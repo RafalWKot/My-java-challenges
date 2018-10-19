@@ -29,8 +29,7 @@ public class Round {
             System.out.println(j + 1 + " " + schemes.get(j).getMove().getText());
         }
         System.out.println(LoadText.getText(Application.GAMEFILE, "#PLAYER_SYMBOL"));
-        Scanner scanner = new Scanner(System.in);
-        setHumanMove(schemes.get(scanner.nextInt() - 1).getMove());
+        setHumanMove(schemes.get(Application.INPUT.nextInt() - 1).getMove());
     }
 
     private void addComputerMove() {

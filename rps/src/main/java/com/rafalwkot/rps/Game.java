@@ -1,17 +1,14 @@
 package com.rafalwkot.rps;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class Game {
 
     List<Configuration> configurations;
-    Scanner scanner;
 
     public Game(List<Configuration> configurations) {
         this.configurations = configurations;
-        scanner = new Scanner(System.in);
     }
 
     public void play() {
@@ -25,7 +22,7 @@ public class Game {
         Duel duel = new Duel(variant, scheme);
         duel.run();
         System.out.println(LoadText.getText(Application.GAMEFILE, "#HISTORY"));
-        int historyCondition=  scanner.nextInt();
+        int historyCondition=  Application.INPUT.nextInt();
         if(historyCondition == 1) {
             showHistory(duel);
         }
@@ -37,7 +34,7 @@ public class Game {
         IntStream.range(0, configurations.size())
                 .forEach(i -> System.out.println(i + 1 + " " + configurations.get(i).getGameName()));
         System.out.println(LoadText.getText(Application.GAMEFILE, "#PLAYER_CHOICE"));
-        Variant variant = Variant.valueOf(scanner.nextInt() - 1).orElseThrow(NullPointerException::new); //komunikat, że wartość jest nie poprawna
+        Variant variant = Variant.valueOf(Application.INPUT.nextInt() - 1).orElseThrow(InputDataException::new);
         System.out.println("\n" + configurations.get(variant.getChoice()).getDescription());
 
         return variant;

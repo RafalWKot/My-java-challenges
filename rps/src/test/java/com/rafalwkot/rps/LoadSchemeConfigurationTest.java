@@ -13,7 +13,7 @@ public class LoadSchemeConfigurationTest {
         //Given
 
         //When
-        String newLine = LoadText.getText("game_texts", "#GAME_NAME");
+        String newLine = LoadText.getText("game_texts.txt", "#GAME_NAME");
         //Then
         Assert.assertEquals("Game: RPSSL 1.0", newLine);
     }
