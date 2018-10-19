@@ -12,11 +12,11 @@ public class Configuration {
         this.fileScheme = fileScheme;
     }
 
-    String getGameName() {
+    public String getGameName() {
         return LoadText.getText(fileTexts, "#BATTLE_NAME");
     }
 
-    String getDescription() {
+    public String getDescription() {
         return LoadText.getText(fileTexts, "#ABOUT_BATTLE");
     }
 

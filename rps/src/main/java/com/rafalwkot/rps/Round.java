@@ -15,18 +15,20 @@ public class Round {
 
     public void run() {
         addHumanMove();
+        System.out.println(Application.PLAYERNAME + ": " + humanMove.getText());
         addComputerMove();
+        System.out.println(LoadText.getText(Application.GAMEFILE, "#COMPUTER_SYMBOL") + computerMove.getText());
         setResult(fight());
         System.out.println();
-        System.out.println(LoadText.getText(Application.GAMEFILE, "RESULT"));
+        System.out.println(LoadText.getText(Application.GAMEFILE, "#RESULT"));
     }
 
     private void addHumanMove() {
-        System.out.println(LoadText.getText(Application.GAMEFILE, "SYMBOL"));
+        System.out.println(LoadText.getText(Application.GAMEFILE, "#SYMBOL"));
         for (int j = 0; j < schemes.size(); j++) {
             System.out.println(j + 1 + " " + schemes.get(j).getMove().getText());
         }
-        System.out.println(LoadText.getText(Application.GAMEFILE, "PLAYER_SYMBOL"));
+        System.out.println(LoadText.getText(Application.GAMEFILE, "#PLAYER_SYMBOL"));
         Scanner scanner = new Scanner(System.in);
         setHumanMove(schemes.get(scanner.nextInt() - 1).getMove());
     }

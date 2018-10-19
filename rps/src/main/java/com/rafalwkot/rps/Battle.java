@@ -22,7 +22,8 @@ public class Battle {
     public void run() {
         addQuantityOfRounds();
         for (int i = 0; i < quantityOfRounds; i++) {
-            System.out.println(LoadText.getText(Application.GAMEFILE, "#NO_ROUND") + i + 1);
+            System.out.println();
+            System.out.println(LoadText.getText(Application.GAMEFILE, "#NO_ROUND") + i);
             rounds.add(new Round(scheme));
             rounds.get(i).run();
             addPoint(rounds.get(i).getResult());

@@ -6,9 +6,11 @@ import java.util.Scanner;
 
 public class Application {
 
-    public static final String RPSTEXTS = "rps_scheme";
-    public static final String RPSSLTEXTS = "rpssl_scheme";
-    public static final String GAMEFILE ="game.txt";
+    public static final String RPSTEXTS = "rps_text.txt";
+    public static final String RPSSCHEME = "rps_scheme";
+    public static final String RPSSLTEXTS = "rps_text.txt";
+    public static final String RPSSLSCHEME = "rpssl_scheme";
+    public static final String GAMEFILE ="game_texts.txt";
     public static String PLAYERNAME;
 
     public static void main(String[] args) {
@@ -20,12 +22,13 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         PLAYERNAME = scanner.nextLine();
 
+        System.out.println();
         System.out.println(LoadText.getText(GAMEFILE, "#INTRODUCE") + " " + PLAYERNAME + "!");
         System.out.println(LoadText.getText(GAMEFILE, "#BEGINNING"));
 
         List<Configuration> configurations = new ArrayList<>();
-        configurations.add(new Configuration(GAMEFILE, RPSTEXTS));
-        configurations.add(new Configuration(GAMEFILE, RPSSLTEXTS));
+        configurations.add(new Configuration(RPSTEXTS, RPSSCHEME));
+        configurations.add(new Configuration(RPSSLTEXTS, RPSSLSCHEME));
 
         boolean endGameCondition = true;
         while (endGameCondition) {
