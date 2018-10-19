@@ -22,9 +22,14 @@ public class Game {
         } else {
             scheme = configurations.get(1).getPossibleMoves();
         }
-        Battle battle = new Battle(variant, scheme);
-        battle.run();
-        //readHistory(battle);
+        Duel duel = new Duel(variant, scheme);
+        duel.run();
+        System.out.println(LoadText.getText(Application.GAMEFILE, "#HISTORY"));
+        int historyCondition=  scanner.nextInt();
+        if(historyCondition == 1) {
+            showHistory(duel);
+        }
+
     }
 
     private Variant init() {
@@ -38,5 +43,16 @@ public class Game {
         return variant;
     }
 
-    private void readHistory() {}
+    private void showHistory(Duel duel) {
+        for (int i = 0; i < duel.getRounds().size(); i++) {
+            System.out.println(LoadText.getText(Application.GAMEFILE, "#NO_ROUND") +  i);
+            System.out.print(LoadText.getText(Application.GAMEFILE, "#PLAYER_CHOICE") +
+                            duel.getRounds().get(i).getHumanMove().getText() +
+                            " vs " +
+                            LoadText.getText(Application.GAMEFILE, "#COMPUTER_SYMBOL") +
+                            duel.getRounds().get(i).getComputerMove().getText() +
+                            "\n");
+
+        }
+    }
 }

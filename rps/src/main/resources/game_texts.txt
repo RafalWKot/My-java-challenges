@@ -16,7 +16,7 @@ No to zaczynamy :)
 
 #ASK_FOR_REPLAY
 Czy chesz zagrać jeszcze raz?
-Jeśli tak naciśnij "1", jeśli nie naciśnij "2"
+Jeśli tak naciśnij "1", jeśli nie naciśnij dowolny klawisz
 
 #GOODBYE
 Do zobaczenia ponownie.
@@ -56,5 +56,9 @@ Komputer:
 
 #RESULT
 Wynik:
+
+#HISTORY
+Czy chcesz wyświetlić historię?
+Jeśli tak naciśnij "1", jeśli nie naciśnij dowolny klawisz
 
 #ENDFILE

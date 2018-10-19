@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Battle {
+public class Duel {
 
     private final Variant variant;
     private final List<Scheme> scheme;
@@ -13,7 +13,7 @@ public class Battle {
     private int humanPoints;
     private int computerPoints;
 
-    public Battle(Variant variant, List<Scheme> scheme) {
+    public Duel(Variant variant, List<Scheme> scheme) {
         this.variant = variant;
         this.scheme = scheme;
         rounds = new ArrayList<>();
@@ -63,5 +63,9 @@ public class Battle {
         return Application.PLAYERNAME + ": " + humanPoints +
                 " vs " +
                 Player.Computer.getText() + ": " + computerPoints;
+    }
+
+    public List<Round> getRounds() {
+        return rounds;
     }
 }

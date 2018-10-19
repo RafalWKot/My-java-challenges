@@ -51,6 +51,14 @@ public class Round {
         return result;
     }
 
+    public Move getHumanMove() {
+        return humanMove;
+    }
+
+    public Move getComputerMove() {
+        return computerMove;
+    }
+
     private void setHumanMove(Move humanMove) {
         this.humanMove = humanMove;
     }
