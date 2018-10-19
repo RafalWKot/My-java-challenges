@@ -23,3 +23,4 @@ public enum Variant {
         return choice;
     }
 }
+

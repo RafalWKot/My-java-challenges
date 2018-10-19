@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class LoadConfigurationTest {
+public class LoadSchemeConfigurationTest {
 
     @Test
     public void testGetTextFromRPS() {
@@ -13,7 +13,7 @@ public class LoadConfigurationTest {
         //Given
 
         //When
-        String newLine = LoadConfiguration.getText(Application.INTRODUCEFILE, "#GAME_NAME");
+        String newLine = LoadText.getText("game_texts", "#GAME_NAME");
         //Then
         Assert.assertEquals("Game: RPSSL 1.0", newLine);
     }
@@ -24,7 +24,7 @@ public class LoadConfigurationTest {
         //Given
 
         //When
-        List<Scheme> schemes = LoadConfiguration.getScheme(Application.RPSTEXTS);
+        List<Scheme> schemes = LoadScheme.getScheme("rps_scheme");
 
         //Then
         Assert.assertEquals(3, schemes.size());
@@ -38,7 +38,7 @@ public class LoadConfigurationTest {
         //Given
 
         //When
-        List<Scheme> schemes = LoadConfiguration.getScheme(Application.RPSSLTEXTS);
+        List<Scheme> schemes = LoadScheme.getScheme("rpssl_scheme");
 
         //Then
         Assert.assertEquals(5, schemes.size());

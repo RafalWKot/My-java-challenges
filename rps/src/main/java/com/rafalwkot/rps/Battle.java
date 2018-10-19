@@ -22,7 +22,7 @@ public class Battle {
     public void run() {
         addQuantityOfRounds();
         for (int i = 0; i < quantityOfRounds; i++) {
-            System.out.println(LoadConfiguration.getText(Game.GAMESETTING, "#NO_ROUND") + i + 1);
+            System.out.println(LoadText.getText(Application.GAMEFILE, "#NO_ROUND") + i + 1);
             rounds.add(new Round(scheme));
             rounds.get(i).run();
             addPoint(rounds.get(i).getResult());
@@ -31,7 +31,7 @@ public class Battle {
     }
 
     private void addQuantityOfRounds() {
-        System.out.println(LoadConfiguration.getText(Game.GAMESETTING, "#QUANTITY_ROUNDS"));
+        System.out.println(LoadText.getText(Application.GAMEFILE, "#QUANTITY_ROUNDS"));
         Scanner scanner = new Scanner(System.in);
         quantityOfRounds = scanner.nextInt();
     }
@@ -46,13 +46,13 @@ public class Battle {
 
     private void printResult(int noRound) {
         if (noRound < quantityOfRounds - 1) {
-            System.out.println(LoadConfiguration.getText(Game.GAMESETTING, "#CURRENT_RESULT") + toString());
+            System.out.println(LoadText.getText(Application.GAMEFILE, "#CURRENT_RESULT") + toString());
         } else {
-            System.out.println(LoadConfiguration.getText(Game.GAMESETTING, "#END_RESULT") + toString());
+            System.out.println(LoadText.getText(Application.GAMEFILE, "#END_RESULT") + toString());
             if (humanPoints > computerPoints) {
-                System.out.println(LoadConfiguration.getText(Game.GAMESETTING, "#CONGRATULATIONS"));
+                System.out.println(LoadText.getText(Application.GAMEFILE, "#CONGRATULATIONS"));
             } else {
-                System.out.println(LoadConfiguration.getText(Game.GAMESETTING, "#DEFEAT"));
+                System.out.println(LoadText.getText(Application.GAMEFILE, "#DEFEAT"));
             }
         }
     }

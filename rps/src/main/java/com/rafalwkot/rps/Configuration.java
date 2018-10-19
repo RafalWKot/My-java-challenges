@@ -4,23 +4,23 @@ import java.util.List;
 
 public class Configuration {
 
-    private final String fileName;
-    private LoadConfiguration loadConfiguration;
+    private final String fileTexts;
+    private final String fileScheme;
 
-    public Configuration(String fileName) {
-        this.loadConfiguration = new LoadConfiguration();
-        this.fileName = fileName;
+    public Configuration(String fileTexts, String fileScheme) {
+        this.fileTexts = fileTexts;
+        this.fileScheme = fileScheme;
     }
 
     String getGameName() {
-        return loadConfiguration.getText(fileName, "#BATTLE_NAME");
+        return LoadText.getText(fileTexts, "#BATTLE_NAME");
     }
 
     String getDescription() {
-        return loadConfiguration.getText(fileName, "#ABOUT_BATTLE");
+        return LoadText.getText(fileTexts, "#ABOUT_BATTLE");
     }
 
     public List<Scheme> getPossibleMoves() {
-        return loadConfiguration.getScheme(fileName);
+        return LoadScheme.getScheme(fileScheme);
     }
 }

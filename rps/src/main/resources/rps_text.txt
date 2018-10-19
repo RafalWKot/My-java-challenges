@@ -14,31 +14,4 @@ Papier - Kamień - Nożyce
 "Gracz, który pierwszy uzyska umówioną wcześniej ilość punktów, wygrywa partię.
 "No to zaczynamy! Powodzenia!
 
-#1
-Kamień
-
-#WIN
-Nożyce
-
-#DEFEAT
-Papier
-
-#2
-Papier
-
-#WIN
-Kamień
-
-#DEFEAT
-Nożyce
-
-#3
-Nożyce
-
-#WIN
-Papier
-
-#DEFEAT
-Kamień
-
 #ENDFILE

@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 
 public class Game {
 
-    public static final String GAMESETTING = "game.txt";
     List<Configuration> configurations;
     Scanner scanner;
 
@@ -29,11 +28,11 @@ public class Game {
     }
 
     private Variant init() {
-        System.out.println(LoadConfiguration.getText(GAMESETTING, "#GAME_VARIANT"));
+        System.out.println(LoadText.getText(Application.GAMEFILE, "#GAME_VARIANT"));
         IntStream.range(0, configurations.size())
                 .forEach(i -> System.out.println(i + 1 + " " + configurations.get(i).getGameName()));
-        System.out.println(LoadConfiguration.getText(GAMESETTING, "#PLAYER_CHOICE"));
-        Variant variant = Variant.valueOf(scanner.nextInt() - 1).orElseThrow(NullPointerException::new);
+        System.out.println(LoadText.getText(Application.GAMEFILE, "#PLAYER_CHOICE"));
+        Variant variant = Variant.valueOf(scanner.nextInt() - 1).orElseThrow(NullPointerException::new); //komunikat, że wartość jest nie poprawna
         System.out.println("\n" + configurations.get(variant.getChoice()).getDescription());
 
         return variant;
