@@ -1,0 +1,13 @@
+#GAME_NAME
+Sudoku 1.0
+
+#AUTHOR_NAME
+Author: Rafał Kot
+
+#ABOUT
+Celem aplikacji jest rozwiązanie Sudoku na podstawie wprowadzonych przez Ciebie
+danych początkowych.
+
+#INTRODUCE
+No to chcesz rozwiązać Sudoku? Tak? No to zaczynamy.
+
