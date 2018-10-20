@@ -9,6 +9,7 @@ public class Load {
 
     private static final String EMPTY = "";
     private static Scanner SCANNER;
+    public static final Scanner INPUT_CONSOLE = new Scanner(System.in);
 
     public static String getText(String fileName, String text) {
         try {

@@ -11,5 +11,12 @@ public class Application {
         System.out.println(Load.getText(GAMETEXTS, "#ABOUT"));
         System.out.println(Load.getText(GAMETEXTS, "#INTRODUCE") + "\n");
 
+        boolean gameFinished = false;
+        while(!gameFinished) {
+            SudokuGame theGame = new SudokuGame();
+            gameFinished = theGame.resolveSudoku();
+        }
+
+        System.out.println(Load.getText(GAMETEXTS, "#GOODBYE") + "\n");
     }
 }

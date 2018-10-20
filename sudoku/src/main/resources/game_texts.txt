@@ -11,3 +11,22 @@ danych początkowych.
 #INTRODUCE
 No to chcesz rozwiązać Sudoku? Tak? No to zaczynamy.
 
+#GOODBYE
+Do zobaczenia wkrótce.
+
+#SUDOKU_INPUT_METHOD
+Wybierz jak chcesz wprowadzić planszę z danymi do rozwiązania.
+(Wciśnij odpowiednią cyfrę)
+1 - z pliku
+2 - z konsoli
+
+#INCORRECT_SUDOKU_INPUT_METHOD
+Wybrałeś nie odpowiedni przycisk. Spróbuj ponownie :)
+
+#ASK_FOR_REPLAY
+Czy chcesz zagrać jeszcze raz?
+(Wciśnij odpowiedni przycisk)
+1 - tak chcę zagrać.
+dowolny - nie chcę juz grać.
+
+#ENDFILE
