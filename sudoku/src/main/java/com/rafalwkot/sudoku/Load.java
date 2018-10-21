@@ -4,26 +4,27 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Load {
 
+    public static final Scanner INPUT_CONSOLE = new Scanner(System.in);
     private static final String EMPTY = "";
     private static Scanner SCANNER;
-    public static final Scanner INPUT_CONSOLE = new Scanner(System.in);
 
     public static String getText(String fileName, String text) {
         try {
             SCANNER = new Scanner(getFile(fileName));
-            String textFromFile;
+            StringBuilder textFromFile = new StringBuilder();
             while (true) {
                 if (SCANNER.nextLine().equals(text)) {
-                    textFromFile = SCANNER.nextLine();
+                    textFromFile.append(SCANNER.nextLine());
                     String line = SCANNER.nextLine();
                     while (!line.equals(EMPTY)) {
-                        textFromFile = textFromFile + "\n" + line;
+                        textFromFile.append("\n" + line);
                         line = SCANNER.nextLine();
                     }
-                    return textFromFile;
+                    return textFromFile.toString();
                 }
             }
         } catch (FileNotFoundException e) {
@@ -31,6 +32,19 @@ public class Load {
                     "lub niepoprawna jest jego  konfiguracja!");
         }
         return "";
+    }
+
+    public static SudokuBoard getInitialBoardFromFile(String fileName) {
+        SudokuBoard sudokuBoard = new SudokuBoard();
+        try {
+            SCANNER = new Scanner(getFile(fileName));
+            IntStream.range(0, SudokuBoard.ROWQUANTITY)
+                    .forEach(i -> sudokuBoard.getSudokuRows().get(i).getSudokuElementsInRow().stream()
+                            .forEach(t -> t.setValue(SCANNER.nextInt())));
+        } catch (FileNotFoundException e) {
+            System.out.println(getText(Application.GAMETEXTS, "#FIlE_SUDOKU_NOT_FOUND"));
+        }
+        return sudokuBoard;
     }
 
     private static File getFile(String fileName) throws FileNotFoundException {

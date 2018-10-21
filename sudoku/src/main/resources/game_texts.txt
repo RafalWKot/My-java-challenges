@@ -20,13 +20,55 @@ Wybierz jak chcesz wprowadzić planszę z danymi do rozwiązania.
 1 - z pliku
 2 - z konsoli
 
+#YOUR_CHOICE
+Twój wybór:
+
+#FILE
+Plik:
+
+#YOUR_SUDOKU
+Twoja plansza:
+
 #INCORRECT_SUDOKU_INPUT_METHOD
 Wybrałeś nie odpowiedni przycisk. Spróbuj ponownie :)
 
 #ASK_FOR_REPLAY
 Czy chcesz zagrać jeszcze raz?
-(Wciśnij odpowiedni przycisk)
+(Wprowadź odpowiedni znak)
 1 - tak chcę zagrać.
 dowolny - nie chcę juz grać.
+
+#FILE_NAME
+Podaj pełną nazwę pliku:
+
+#FIlE_SUDOKU_NOT_FOUND
+Plik z planszą sudoku  nie został znaleziony
+lub niepoprawna jest jego  konfiguracja!
+Wczytana została pusta plansza.
+Możesz do niej dodać liczby z konsoli.
+
+#MANUAL_FILLING_SUDOKU
+Proszę podać trzy cyfry, naciskając po każdej z nich enter.
+Pierwsza cyfra to numer rzedu, druga numer kolumny, trzecia to wartość w komórce.
+Wszystkie z liczb muszą byc z przedziału [1,9].
+Po każdej podanej wartości zostanie wyświetlona plansza z zaznaczoną wartością.
+W każdym momencie można zakończyć dodawanie wartości
+
+#ASK_FOR_VALUE
+Podaj wartość
+
+#ROW
+Rząd:
+
+#COLUMN
+Kolumna:
+
+#VALUE
+Wartość:
+
+#INCORRECT_VALUE
+Dane niepoprawne. Spróbuj ponownie lub zakończ bez tej wartości.
+1 - Spróbuj ponownie
+dowolny znak - spróbuj ponownie
 
 #ENDFILE
