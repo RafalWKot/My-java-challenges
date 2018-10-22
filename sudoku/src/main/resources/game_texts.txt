@@ -35,8 +35,8 @@ Wybrałeś nie odpowiedni przycisk. Spróbuj ponownie :)
 #ASK_FOR_REPLAY
 Czy chcesz zagrać jeszcze raz?
 (Wprowadź odpowiedni znak)
-1 - tak chcę zagrać.
-dowolny - nie chcę juz grać.
+Tak -   1
+Nie -   dowolny znak
 
 #FILE_NAME
 Podaj pełną nazwę pliku:
@@ -48,11 +48,16 @@ Wczytana została pusta plansza.
 Możesz do niej dodać liczby z konsoli.
 
 #MANUAL_FILLING_SUDOKU
-Proszę podać trzy cyfry, naciskając po każdej z nich enter.
+1. Proszę podać trzy cyfry, naciskając po każdej z nich enter.
 Pierwsza cyfra to numer rzedu, druga numer kolumny, trzecia to wartość w komórce.
 Wszystkie z liczb muszą byc z przedziału [1,9].
-Po każdej podanej wartości zostanie wyświetlona plansza z zaznaczoną wartością.
-W każdym momencie można zakończyć dodawanie wartości
+2. Po każdej podanej wartości zostanie wyświetlona plansza z zaznaczoną wartością.
+W każdym momencie można zakończyć dodawanie wartości.
+3. Jeżeli wartośc będzie niepoprawna zostaniesz poproszony o skorygowanie swojego wyboru.
+4. Pamiętaj, że należy się trzymać zasad SUDOKU: w jendym rzędzie, kolumnie lub kwadracie
+wartości nie mogą się powtarzać. Zostaniesz o tym poinformowany w razie wpisania błędnej wartości.
+5. Jeżeli chcesz usunąć daną wartość nadpisz ją zerem.
+6. Jeżeli chcesz zmienić wartość, wprowadź nową wartość w to samo miejsce.
 
 #ASK_FOR_VALUE
 Podaj wartość
@@ -68,7 +73,19 @@ Wartość:
 
 #INCORRECT_VALUE
 Dane niepoprawne. Spróbuj ponownie lub zakończ bez tej wartości.
-1 - Spróbuj ponownie
-dowolny znak - spróbuj ponownie
+Spróbuj ponownie lub zakończ wprowadzanie wartości.
+
+#CORRECT_VALUE
+Wartość poprawna.
+
+#NEXT_VALUE
+Chcesz wprowadzić kolejną wartość?
+Tak -   1
+Nie -   dowolny znak
+
+#ASK_TO_RESOLVE_SUDOKU
+Czy chcesz rozwiązać przygotowane SUDOKU?
+Tak -   1
+Nie -   dowolny znak
 
 #ENDFILE

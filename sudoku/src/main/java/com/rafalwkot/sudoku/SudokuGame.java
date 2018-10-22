@@ -2,43 +2,62 @@ package com.rafalwkot.sudoku;
 
 public class SudokuGame {
 
+    private SudokuBoard sudokuBoard;
+
+    public SudokuGame() {
+        this.sudokuBoard = new SudokuBoard();
+    }
+
     public boolean resolveSudoku() {
-        SudokuBoard sudokuBoard = init();
+        init();
         System.out.println(Load.getText(Application.GAMETEXTS, "#YOUR_SUDOKU"));
         System.out.println(sudokuBoard.toString());
+        System.out.println(Load.getText(Application.GAMETEXTS, "#ASK_TO_RESOLVE_SUDOKU"));
+        String inputResolve = Load.INPUT_CONSOLE.next();
+        if (inputResolve.equals("1")) {
+
+        }
         return isReplayResolve();
     }
 
-    private SudokuBoard init() {
-        SudokuBoard sudokuBoard;
-        boolean conditionOfCorrectData = true;
-        while (conditionOfCorrectData) {
+    private void init() {
+        boolean correctData = true;
+        while (correctData) {
             System.out.println(Load.getText(Application.GAMETEXTS, "#SUDOKU_INPUT_METHOD") + "\n");
             System.out.print(Load.getText(Application.GAMETEXTS, "#YOUR_CHOICE"));
-            String mark = Load.INPUT_CONSOLE.next();
-            if (mark.equals("1")) {
-                conditionOfCorrectData = false;
-                System.out.println(Load.getText(Application.GAMETEXTS, "#FILE_NAME"));
-                System.out.print(Load.getText(Application.GAMETEXTS, "#FILE"));
-                String fileName = Load.INPUT_CONSOLE.next();
-                sudokuBoard = Load.getInitialBoardFromFile(fileName);
-                return sudokuBoard;
-            } else if (mark.equals("2")) {
+            String inputMethod = Load.INPUT_CONSOLE.next();
+            if (inputMethod.equals("1")) {
+                setValuesFromFile();
+                System.out.println(sudokuBoard.toString());
+                setValueFromConsole();
+                correctData = false;
+            } else if (inputMethod.equals("2")) {
                 System.out.println(Load.getText(Application.GAMETEXTS, "#MANUAL_FILLING_SUDOKU") + "\n");
-                conditionOfCorrectData = false;
-                boolean endInsertValue = false;
-                while (!endInsertValue) {
-                    boolean conditionOfCorrectDataConsoleInput = false;
-                    while (!conditionOfCorrectDataConsoleInput) {
-
-                    }
-                }
+                correctData = false;
+                setValueFromConsole();
             } else {
                 System.out.println(Load.getText(Application.GAMETEXTS, "#INCORRECT_SUDOKU_INPUT_METHOD") + "\n");
             }
         }
-        return null;
     }
+
+    private void setValueFromConsole() {
+        boolean endInsertValue = false;
+        while (!endInsertValue) {
+            if (!insertValueToCell(sudokuBoard)) {
+                System.out.println(Load.getText(Application.GAMETEXTS, "#INCORRECT_VALUE"));
+            } else {
+                System.out.println(sudokuBoard.toString());
+            }
+            System.out.println(Load.getText(Application.GAMETEXTS, "#NEXT_VALUE"));
+            System.out.print(Load.getText(Application.GAMETEXTS, "#YOUR_CHOICE"));
+            String conditionNextValue = Load.INPUT_CONSOLE.next();
+            if (!conditionNextValue.equals("1")) {
+                endInsertValue = true;
+            }
+        }
+    }
+
 
     private boolean isReplayResolve() {
         boolean gameFinished = true;
@@ -50,17 +69,23 @@ public class SudokuGame {
         return gameFinished;
     }
 
-    private SudokuBoard insertValueToBoard(SudokuBoard sudokuBoard) {
-        System.out.println(Load.getText(Application.GAMETEXTS, "##ASK_FOR_VALUE"));
-        System.out.println(Load.getText(Application.GAMETEXTS, "#ROW"));
-        String row = Load.INPUT_CONSOLE.nextLine();
-        System.out.println(Load.getText(Application.GAMETEXTS, "#COLUMN"));
-        String columnn = Load.INPUT_CONSOLE.nextLine();
-        System.out.println(Load.getText(Application.GAMETEXTS, "#VALUE"));
-        String value = Load.INPUT_CONSOLE.nextLine();
-
-        return sudokuBoard;
+    private void setValuesFromFile() {
+        System.out.println(Load.getText(Application.GAMETEXTS, "#FILE_NAME"));
+        System.out.print(Load.getText(Application.GAMETEXTS, "#FILE"));
+        String fileName = Load.INPUT_CONSOLE.next();
+        sudokuBoard = Load.getInitialBoardFromFile(fileName);
     }
 
+    private boolean insertValueToCell(SudokuBoard sudokuBoard) {
+        Validation validation = new Validation(sudokuBoard);
+        System.out.println(Load.getText(Application.GAMETEXTS, "#ASK_FOR_VALUE"));
+        System.out.println(Load.getText(Application.GAMETEXTS, "#ROW"));
+        String row = Load.INPUT_CONSOLE.next();
+        System.out.println(Load.getText(Application.GAMETEXTS, "#COLUMN"));
+        String column = Load.INPUT_CONSOLE.next();
+        System.out.println(Load.getText(Application.GAMETEXTS, "#VALUE"));
+        String value = Load.INPUT_CONSOLE.next();
+        return validation.setValueToBoard(row, column, value);
+    }
 
 }
