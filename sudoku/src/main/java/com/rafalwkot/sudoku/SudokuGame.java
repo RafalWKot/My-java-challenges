@@ -15,7 +15,8 @@ public class SudokuGame {
         System.out.println(Load.getText(Application.GAMETEXTS, "#ASK_TO_RESOLVE_SUDOKU"));
         String inputResolve = Load.INPUT_CONSOLE.next();
         if (inputResolve.equals("1")) {
-
+            AlgoritmSudoku algoritmSudoku = new AlgoritmSudoku(sudokuBoard);
+            algoritmSudoku.resolve();
         }
         return isReplayResolve();
     }
@@ -29,7 +30,12 @@ public class SudokuGame {
             if (inputMethod.equals("1")) {
                 setValuesFromFile();
                 System.out.println(sudokuBoard.toString());
-                setValueFromConsole();
+                System.out.println(Load.getText(Application.GAMETEXTS, "#NEXT_VALUE"));
+                System.out.print(Load.getText(Application.GAMETEXTS, "#YOUR_CHOICE"));
+                String conditionNextValue = Load.INPUT_CONSOLE.next();
+                if (conditionNextValue.equals("1")) {
+                    setValueFromConsole();
+                }
                 correctData = false;
             } else if (inputMethod.equals("2")) {
                 System.out.println(Load.getText(Application.GAMETEXTS, "#MANUAL_FILLING_SUDOKU") + "\n");

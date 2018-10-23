@@ -20,8 +20,6 @@ public class SudokuBoard {
 
     }
 
-
-
     @Override
     public String toString() {
         return "    1   2   3    4   5   6    7   8   9  " + "\n" +
@@ -45,4 +43,5 @@ public class SudokuBoard {
                 "9 " + sudokuRows.get(8).toString() + "\n" +
                 "  ---------------------------------------" + "\n";
     }
+
 }

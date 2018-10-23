@@ -83,6 +83,7 @@ Chcesz wprowadzić kolejną wartość?
 Tak -   1
 Nie -   dowolny znak
 
+
 #ASK_TO_RESOLVE_SUDOKU
 Czy chcesz rozwiązać przygotowane SUDOKU?
 Tak -   1

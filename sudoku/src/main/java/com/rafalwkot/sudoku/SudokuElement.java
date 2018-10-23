@@ -15,12 +15,12 @@ public class SudokuElement {
 
     @Setter
     private Integer value;
-    private Set<Integer> possibleValues;
+    private List<Integer> possibleValues;
 
 
     SudokuElement() {
         this.value = EMPTY;
-        possibleValues = new HashSet<>();
+        possibleValues = new ArrayList<>();
         IntStream.range(0, VALUESQUANTITY)
                 .forEach(i -> possibleValues.add(i + 1));
     }
