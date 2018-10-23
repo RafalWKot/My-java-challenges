@@ -6,18 +6,11 @@ import org.junit.Test;
 
 public class ValidationTest {
 
-    private SudokuBoard sudokuBoard;
-    private Validation validation;
-
-    @Before
-    public void setUp() throws Exception {
-        //Given
-        sudokuBoard = new SudokuBoard();
-        validation = new Validation(sudokuBoard);
-    }
-
     @Test
-    public void testInsertValueToBoardByColumn() {
+    public void testInsertValueToBoardByColumnIncorrect() {
+        //Given
+        SudokuBoard sudokuBoard = new SudokuBoard();
+        Validation validation = new Validation(sudokuBoard);
 
         //When
         boolean correctInserting = validation.setValueToBoard("1", "1", "5");
@@ -29,8 +22,10 @@ public class ValidationTest {
     }
 
     @Test
-    public void testInsertValueToBoardByRow() {
-
+    public void testInsertValueToBoardByRowIncorrect() {
+        //Given
+        SudokuBoard sudokuBoard = new SudokuBoard();
+        Validation validation = new Validation(sudokuBoard);
         //When
         boolean correctInserting = validation.setValueToBoard("1", "1", "5");
         boolean inCorrectInserting = validation.setValueToBoard("1", "7", "5");
@@ -41,7 +36,10 @@ public class ValidationTest {
     }
 
     @Test
-    public void testInsertValueToBoardBySquare() {
+    public void testInsertValueToBoardBySquareIncorrect() {
+        //Given
+        SudokuBoard sudokuBoard = new SudokuBoard();
+        Validation validation = new Validation(sudokuBoard);
 
         //When
         boolean correctInserting = validation.setValueToBoard("1", "1", "5");
@@ -50,5 +48,57 @@ public class ValidationTest {
         //Then
         Assert.assertTrue(correctInserting);
         Assert.assertFalse(inCorrectInserting);
+    }
+
+    @Test
+    public void testValidWholeBoardFromFileCorrect() {
+        //Given
+        SudokuBoard sudokuBoard = Load.getInitialBoardFromFile("sudoku_example.txt");
+        Validation validation = new Validation(sudokuBoard);
+
+        //When
+        boolean isBoardCorrect = validation.validWholeBoard();
+
+        //Then
+        Assert.assertTrue(isBoardCorrect);
+    }
+
+    @Test
+    public void testValidWholeBoardFromFileIncorrectInColumn() {
+        //Given
+        SudokuBoard sudokuBoard = Load.getInitialBoardFromFile("sudoku_example_incorrect_in_column.txt");
+        Validation validation = new Validation(sudokuBoard);
+
+        //When
+        boolean isBoardCorrect = validation.validWholeBoard();
+
+        //Then
+        Assert.assertFalse(isBoardCorrect);
+    }
+
+    @Test
+    public void testValidWholeBoardFromFileIncorrectInRow() {
+        //Given
+        SudokuBoard sudokuBoard = Load.getInitialBoardFromFile("sudoku_example_incorrect_in_row.txt");
+        Validation validation = new Validation(sudokuBoard);
+
+        //When
+        boolean isBoardCorrect = validation.validWholeBoard();
+
+        //Then
+        Assert.assertFalse(isBoardCorrect);
+    }
+
+    @Test
+    public void testValidWholeBoardFromFileIncorrectInSquare() {
+        //Given
+        SudokuBoard sudokuBoard = Load.getInitialBoardFromFile("sudoku_example_incorrect_in_square.txt");
+        Validation validation = new Validation(sudokuBoard);
+
+        //When
+        boolean isBoardCorrect = validation.validWholeBoard();
+
+        //Then
+        Assert.assertFalse(isBoardCorrect);
     }
 }

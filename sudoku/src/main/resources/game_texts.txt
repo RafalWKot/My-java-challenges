@@ -88,4 +88,10 @@ Czy chcesz rozwiązać przygotowane SUDOKU?
 Tak -   1
 Nie -   dowolny znak
 
+#SUDOKU_LOGIC_INCORRECT
+Logika SUDOKU wprowadzonego z pliku niepoprawna.
+Wczytana została pusta tablicaa.
+Możesz do niej dodać liczby z konsoli.
+
+
 #ENDFILE

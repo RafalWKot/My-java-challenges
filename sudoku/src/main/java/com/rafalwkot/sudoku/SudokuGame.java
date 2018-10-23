@@ -41,6 +41,18 @@ public class SudokuGame {
         }
     }
 
+    private boolean insertValueToCell(SudokuBoard sudokuBoard) {
+        Validation validation = new Validation(sudokuBoard);
+        System.out.println(Load.getText(Application.GAMETEXTS, "#ASK_FOR_VALUE"));
+        System.out.println(Load.getText(Application.GAMETEXTS, "#ROW"));
+        String row = Load.INPUT_CONSOLE.next();
+        System.out.println(Load.getText(Application.GAMETEXTS, "#COLUMN"));
+        String column = Load.INPUT_CONSOLE.next();
+        System.out.println(Load.getText(Application.GAMETEXTS, "#VALUE"));
+        String value = Load.INPUT_CONSOLE.next();
+        return validation.setValueToBoard(row, column, value);
+    }
+
     private void setValueFromConsole() {
         boolean endInsertValue = false;
         while (!endInsertValue) {
@@ -58,7 +70,6 @@ public class SudokuGame {
         }
     }
 
-
     private boolean isReplayResolve() {
         boolean gameFinished = true;
         System.out.println(Load.getText(Application.GAMETEXTS, "#ASK_FOR_REPLAY") + "\n");
@@ -73,19 +84,13 @@ public class SudokuGame {
         System.out.println(Load.getText(Application.GAMETEXTS, "#FILE_NAME"));
         System.out.print(Load.getText(Application.GAMETEXTS, "#FILE"));
         String fileName = Load.INPUT_CONSOLE.next();
-        sudokuBoard = Load.getInitialBoardFromFile(fileName);
+        Validation validation = new Validation(Load.getInitialBoardFromFile(fileName));
+        if (validation.validWholeBoard()) {
+            sudokuBoard = Load.getInitialBoardFromFile(fileName);
+        }
+        else {
+            System.out.print(Load.getText(Application.GAMETEXTS, "#SUDOKU_LOGIC_INCORRECT"));
+            sudokuBoard = new SudokuBoard();
+        }
     }
-
-    private boolean insertValueToCell(SudokuBoard sudokuBoard) {
-        Validation validation = new Validation(sudokuBoard);
-        System.out.println(Load.getText(Application.GAMETEXTS, "#ASK_FOR_VALUE"));
-        System.out.println(Load.getText(Application.GAMETEXTS, "#ROW"));
-        String row = Load.INPUT_CONSOLE.next();
-        System.out.println(Load.getText(Application.GAMETEXTS, "#COLUMN"));
-        String column = Load.INPUT_CONSOLE.next();
-        System.out.println(Load.getText(Application.GAMETEXTS, "#VALUE"));
-        String value = Load.INPUT_CONSOLE.next();
-        return validation.setValueToBoard(row, column, value);
-    }
-
 }
