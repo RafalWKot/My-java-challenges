@@ -14,38 +14,38 @@ public class AlgoritmSudoku {
 
     private static final int ROWSINSQUARE = 3;
     private static final int COLUMNSINSQUARE = 3;
+
     private SudokuBoard sudokuBoard;
+    private List<List<Branch>> tree;
 
     public AlgoritmSudoku(SudokuBoard sudokuBoard) {
         this.sudokuBoard = sudokuBoard;
+        tree = new ArrayList<>();
     }
 
     public void resolve() {
-        //1. Pierwsze ucruchomienie sprawdza Sudoku i znajduje wszystkie możliwości ruchu
+
         findPossibilitiesForAllBoard();
-
-        printPossibilitiesValues();
-
         boolean nextMoveCorrect = true;
-        int security = 0;
-        while (nextMoveCorrect && (security < 80)) {
-            printPossibilitiesValues();
-            //2. Wybierz element/elementy gdzie jest najmniej możliwości rychu
-            System.out.println("Min z możłiwych ruchów:");
-            int numberOfPotetialMovesInMinElements = findMinOfSizePossibleValues(findPotentialMoves());
-            System.out.println(numberOfPotetialMovesInMinElements);
-            List<Integer> sudokuElementsWithMinPossibles = getListOfElementWithMinPossibles(numberOfPotetialMovesInMinElements, findPotentialMoves());
-            printPossibleValuesOfMinWalues(sudokuElementsWithMinPossibles);
+        int steps = 0;
+        while (nextMoveCorrect) {
+            int numberOfPotentialMovesInMinElements = findMinOfSizePossibleValues(findPotentialMoves());
+            List<Integer> sudokuElementsWithMinPossibles = getListOfElementWithMinPossibles(numberOfPotentialMovesInMinElements, findPotentialMoves());
+            buildBranches(sudokuElementsWithMinPossibles);
             nextMoveCorrect = setValueInEmptyPlace(sudokuElementsWithMinPossibles);
-            System.out.println(sudokuBoard.toString());
-            security++;
+            System.out.println(nextMoveCorrect);
+            steps++;
+            if (checkIfSudokuIsSolved()) {
+                System.out.println("Sudoku solved");
+                nextMoveCorrect = false;
+            }
         }
-        System.out.println("Security = " + security);
-        //3. Jeżeli to konieczne wylosuj element jeden z wielu
-        //4. Jeżeli to konieczne wylosuj wartość jedną z wielu
-        //5. Krok i możliwości zapisz do Listy
-        // }
+        System.out.println("Steps = " + steps);
+        System.out.println(sudokuBoard.toString());
+    }
 
+    public void resolveWithBranches() {
+        findPossibilitiesForAllBoard();
     }
 
     private void findPossibilitiesForRowColumnSquareByIndex(int rowNumber, int columnNumber) {
@@ -129,7 +129,6 @@ public class AlgoritmSudoku {
                 .map(t -> t.getPossibleValues().size())
                 .filter(t -> !t.equals(0))
                 .collect(Collectors.toList());
-
         if (listOfSizePossibleValues.isEmpty()) {
             return 0;
         }
@@ -156,30 +155,110 @@ public class AlgoritmSudoku {
         return Math.round(indexMinPossibleValues % SudokuRow.ELEMENTSQUANTITYINROW);
     }
 
+    private int getValueFromIndexList(int index) {
+        return sudokuBoard.getSudokuRows()
+                .get(getRowNumberFromIndexList(index))
+                .getSudokuElementsInRow()
+                .get(getColumnNumberFromIndexList(index))
+                .getValue();
+    }
+
+    private List<Integer> getPossibleValuesFromIndexList(int index) {
+        return sudokuBoard.getSudokuRows()
+                .get(getRowNumberFromIndexList(index))
+                .getSudokuElementsInRow()
+                .get(getColumnNumberFromIndexList(index))
+                .getPossibleValues();
+    }
+
     private boolean setValueInEmptyPlace(List<Integer> listOfIndex) {
+
         boolean isValueToSet = true;
         if (listOfIndex.isEmpty()) {
             isValueToSet = false;
         } else {
             Random random = new Random();
-            int choosenMove = random.nextInt(listOfIndex.size());
-            int choosenValue = random.nextInt(sudokuBoard.getSudokuRows().get(getRowNumberFromIndexList(listOfIndex.get(choosenMove)))
-                    .getSudokuElementsInRow().get(getColumnNumberFromIndexList(listOfIndex.get(choosenMove)))
+            int chosenMove = random.nextInt(listOfIndex.size());
+            int chosenValue = random.nextInt(sudokuBoard.getSudokuRows().get(getRowNumberFromIndexList(listOfIndex.get(chosenMove)))
+                    .getSudokuElementsInRow().get(getColumnNumberFromIndexList(listOfIndex.get(chosenMove)))
                     .getPossibleValues().size());
 
-            sudokuBoard.getSudokuRows().get(getRowNumberFromIndexList(listOfIndex.get(choosenMove)))
-                    .getSudokuElementsInRow().get(getColumnNumberFromIndexList(listOfIndex.get(choosenMove)))
-                    .setValue(sudokuBoard.getSudokuRows().get(getRowNumberFromIndexList(listOfIndex.get(choosenMove)))
-                            .getSudokuElementsInRow().get(getColumnNumberFromIndexList(listOfIndex.get(choosenMove)))
-                            .getPossibleValues().get(choosenValue));
+            sudokuBoard.getSudokuRows().get(getRowNumberFromIndexList(listOfIndex.get(chosenMove)))
+                    .getSudokuElementsInRow().get(getColumnNumberFromIndexList(listOfIndex.get(chosenMove)))
+                    .setValue(sudokuBoard.getSudokuRows().get(getRowNumberFromIndexList(listOfIndex.get(chosenMove)))
+                            .getSudokuElementsInRow().get(getColumnNumberFromIndexList(listOfIndex.get(chosenMove)))
+                            .getPossibleValues().get(chosenValue));
 
-            findPossibilitiesForRowColumnSquareByIndex(getRowNumberFromIndexList(listOfIndex.get(choosenMove)), getColumnNumberFromIndexList(listOfIndex.get(choosenMove)));
+            tree.get(tree.size() - 1).stream()
+                    .filter(i -> (i.getIndex() == listOfIndex.get(chosenMove) &&
+                            i.getValue() == sudokuBoard.getSudokuRows()
+                                    .get(getRowNumberFromIndexList(listOfIndex.get(chosenMove)))
+                                    .getSudokuElementsInRow().get(getColumnNumberFromIndexList(listOfIndex.get(chosenMove)))
+                                    .getPossibleValues().get(chosenValue)))
+                    .collect(Collectors.toList()).get(0).setTried(true);
+
+            findPossibilitiesForRowColumnSquareByIndex(getRowNumberFromIndexList(listOfIndex.get(chosenMove)), getColumnNumberFromIndexList(listOfIndex.get(chosenMove)));
         }
         return isValueToSet;
     }
 
+    private Branch randomBranchIndex(int step) {
+        Branch randomBranch = null;
+        List<Branch> freeIndex = tree.get(tree.size() - 1 - step).stream()
+                .filter(index -> !index.isTried())
+                .collect(Collectors.toList());
+        if (!freeIndex.isEmpty()) {
+            Random random = new Random();
+            int chosenMove = random.nextInt(freeIndex.size());
+            randomBranch = freeIndex.get(chosenMove);
+        }
+        return randomBranch;
+    }
 
-    //pomocnicza faunkcja
+    private void buildBranches(List<Integer> indexList) {
+        List<Branch> indexListInStep = new ArrayList<>();
+        for (int i = 0; i < indexList.size(); i++) {
+            for (int j = 0; j < getPossibleValuesFromIndexList(indexList.get(i)).size(); j++) {
+                indexListInStep.add(new Branch(indexList.get(i), getPossibleValuesFromIndexList(indexList.get(i)).get(j)));
+            }
+        }
+        tree.add(indexListInStep);
+    }
+
+    private boolean checkIfSudokuIsSolved() {
+        boolean isSolved = true;
+        if (!sudokuBoard.getSudokuRows().stream()
+                .flatMap(i -> i.getSudokuElementsInRow().stream())
+                .filter(t -> t.getValue() == -1)
+                .collect(Collectors.toList()).isEmpty()) {
+            isSolved = false;
+        }
+        return isSolved;
+    }
+
+    private boolean setValueInEmptyPlaceFromBranches() {
+        boolean setValueCorrect = false;
+        int step = tree.size();
+        while (step > 0) {
+            Branch insertBranch = randomBranchIndex(step);
+            if (insertBranch != null) {
+                sudokuBoard.getSudokuRows().get(getRowNumberFromIndexList(insertBranch.getIndex()))
+                        .getSudokuElementsInRow().get(getColumnNumberFromIndexList(insertBranch.getIndex()))
+                        .setValue(sudokuBoard.getSudokuRows().get(getRowNumberFromIndexList(insertBranch.getIndex()))
+                                .getSudokuElementsInRow().get(getColumnNumberFromIndexList(insertBranch.getIndex()))
+                                .getPossibleValues().get(insertBranch.getValue()));
+                setValueCorrect = true;
+            } else {
+                step--;
+            }
+        }
+        return setValueCorrect;
+    }
+
+
+    //----------------------------------------------------------------------------------------------------------------
+    //Funkcje pomocnicze wyświetlające
+    //----------------------------------------------------------------------------------------------------------------
     private void printPossibilitiesValues() {
         System.out.println("Print all possible values");
         for (int i = 0; i < 9; i++) {
@@ -197,4 +276,18 @@ public class AlgoritmSudoku {
         }
     }
 
+    private void printTree() {
+        for (int i = 0; i < tree.size(); i++) {
+            for (int j = 0; j < tree.get(i).size(); j++) {
+                System.out.print("[L:");
+                System.out.print(tree.get(i).get(j).getIndex());
+                System.out.print(",V:");
+                System.out.print(tree.get(i).get(j).getValue());
+                System.out.print(",T:");
+                System.out.print(tree.get(i).get(j).isTried());
+                System.out.print("]");
+            }
+            System.out.println();
+        }
+    }
 }
