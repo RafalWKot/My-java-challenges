@@ -94,5 +94,16 @@ Logika SUDOKU wprowadzonego z pliku niepoprawna.
 Wczytana została pusta tablicaa.
 Możesz do niej dodać liczby z konsoli.
 
+#SUDOKU_SOLVED
+Sudoku rozwiązane. Super!
+
+#SUDOKU_UNSOLVED
+Sudoku nierowiązane. Przykro nam;
+
+#STEPS
+Wykonanych kroków:
+
+#SUDOKU_BOARD
+Ostateczna plansza:
 
 #ENDFILE

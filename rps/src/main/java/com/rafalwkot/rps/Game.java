@@ -15,7 +15,7 @@ public class Game {
         Variant variant = init();
         List<Scheme> scheme;
         if (variant == Variant.RPS) {
-            scheme = configurations.get(0).getPossibleMoves();
+            scheme = configurations.get(0).getPossibleMoves(); //zaczytywanie z mapy
         } else {
             scheme = configurations.get(1).getPossibleMoves();
         }

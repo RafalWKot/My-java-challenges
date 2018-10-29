@@ -15,8 +15,20 @@ public class SudokuGame {
         System.out.println(Load.getText(Application.GAMETEXTS, "#ASK_TO_RESOLVE_SUDOKU"));
         String inputResolve = Load.INPUT_CONSOLE.next();
         if (inputResolve.equals("1")) {
-            AlgoritmSudoku algoritmSudoku = new AlgoritmSudoku(sudokuBoard);
-            algoritmSudoku.resolve();
+            //Algorytm 1
+            //AlgoritmSudoku algoritmSudoku = new AlgoritmSudoku(sudokuBoard);
+            //boolean sudokuSolved = algoritmSudoku.resolve();
+            //Algorytm 2
+            AlgorithmSudokuWithTreeSolutions algorithmSudokuWithTreeSolutions = new AlgorithmSudokuWithTreeSolutions(sudokuBoard);
+            boolean sudokuSolved = algorithmSudokuWithTreeSolutions.resolve();
+
+            if (sudokuSolved) {
+                System.out.println(Load.getText(Application.GAMETEXTS, "#SUDOKU_SOLVED") + "\n");
+            } else {
+                System.out.println(Load.getText(Application.GAMETEXTS, "#SUDOKU_UNSOLVED") + "\n");
+            }
+            System.out.println(Load.getText(Application.GAMETEXTS, "#SUDOKU_BOARD"));
+            System.out.println(sudokuBoard.toString());
         }
         return isReplayResolve();
     }
@@ -93,8 +105,7 @@ public class SudokuGame {
         Validation validation = new Validation(Load.getInitialBoardFromFile(fileName));
         if (validation.validWholeBoard()) {
             sudokuBoard = Load.getInitialBoardFromFile(fileName);
-        }
-        else {
+        } else {
             System.out.print(Load.getText(Application.GAMETEXTS, "#SUDOKU_LOGIC_INCORRECT"));
             sudokuBoard = new SudokuBoard();
         }
