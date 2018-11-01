@@ -1,5 +1,6 @@
 package com.rafalwkot.rps;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Application {
@@ -32,7 +33,7 @@ public class Application {
             System.out.println(textProvider.getText("RPS_GAME_NAME"));
             System.out.println(textProvider.getText("RPSSL_GAME_NAME"));
             System.out.print(textProvider.getText("PLAYER_CHOICE"));
-            Variant variant = Variant.valueOf(input.nextInt()).orElse(Variant.RPS);  //wyjątek
+            Variant variant = Variant.valueOf(input.nextInt()).orElse(Variant.RPS);
 
             SchemeProvider scheme;
             if (variant == Variant.RPS) {
@@ -52,7 +53,9 @@ public class Application {
                 System.out.println(textProvider.getText("SYMBOL"));
                 System.out.println(scheme.keysToString());
                 System.out.print(textProvider.getText("PLAYER_CHOICE"));
-                game.play(new Round(textProvider, scheme, Move.valueOf(input.nextInt()).orElse(Move.ROCK)));  //wyjątek
+                Random random = new Random();
+                game.play(new Round(textProvider, scheme, Move.valueOf(input.nextInt())
+                        .orElse((Move) scheme.getMoves().stream().toArray()[random.nextInt(scheme.getMoves().size())])));
                 game.showActualResult();
             }
 

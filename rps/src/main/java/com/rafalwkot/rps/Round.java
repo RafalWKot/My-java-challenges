@@ -25,8 +25,12 @@ public class Round {
     }
 
     private void setComputerMove() {  //??
+        computerMove = getRandomMove();
+    }
+
+    private Move getRandomMove() {
         Random random = new Random();
-        computerMove = (Move) scheme.getMoves().stream()
+        return (Move) scheme.getMoves().stream()
                 .toArray()[random.nextInt(scheme.getMoves().size())];
     }
 
