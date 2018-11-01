@@ -9,5 +9,4 @@ public class RpsProvider extends SchemeProvider {
         moveWithWin.put(Move.PAPER, EnumSet.of(Move.ROCK));
         moveWithWin.put(Move.SCISSORS, EnumSet.of(Move.PAPER));
     }
-
 }

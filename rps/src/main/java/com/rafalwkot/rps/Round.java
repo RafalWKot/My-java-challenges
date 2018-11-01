@@ -2,7 +2,6 @@ package com.rafalwkot.rps;
 
 import java.util.Random;
 
-
 public class Round {
     private TextProvider textProvider;
     private SchemeProvider scheme;
