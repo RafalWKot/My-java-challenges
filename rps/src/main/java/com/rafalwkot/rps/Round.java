@@ -1,46 +1,39 @@
 package com.rafalwkot.rps;
 
-import java.util.*;
+import java.util.Random;
+
 
 public class Round {
-
-    private final List<Scheme> schemes;
+    private TextProvider textProvider;
+    private SchemeProvider scheme;
     private Result result;
     private Move humanMove;
     private Move computerMove;
 
-    public Round(List<Scheme> schemes) {
-        this.schemes = schemes;
+    public Round(TextProvider textProvider, SchemeProvider scheme, Move humanMove) {
+        this.textProvider = textProvider;
+        this.scheme = scheme;
+        this.humanMove = humanMove;
     }
 
     public void run() {
-        addHumanMove();
-        System.out.println(Application.PLAYERNAME + ": " + humanMove.getText());
-        addComputerMove();
-        System.out.println(LoadText.getText(Application.GAMEFILE, "#COMPUTER_SYMBOL") + computerMove.getText());
-        setResult(fight());
-        System.out.println();
-        System.out.println(LoadText.getText(Application.GAMEFILE, "#RESULT"));
+        setComputerMove();
+        result = fight();
+        System.out.println(Application.PLAYERNAME + ": " + humanMove.getText() +
+                " " + textProvider.getText("COMPUTER_SYMBOL") + " " + computerMove.getText() +
+                " " + textProvider.getText("RESULT") + result.getText());
     }
 
-    private void addHumanMove() {
-        System.out.println(LoadText.getText(Application.GAMEFILE, "#SYMBOL"));
-        for (int j = 0; j < schemes.size(); j++) {
-            System.out.println(j + 1 + " " + schemes.get(j).getMove().getText());
-        }
-        System.out.println(LoadText.getText(Application.GAMEFILE, "#PLAYER_SYMBOL"));
-        setHumanMove(schemes.get(Application.INPUT.nextInt() - 1).getMove());
-    }
-
-    private void addComputerMove() {
+    private void setComputerMove() {  //??
         Random random = new Random();
-        setComputerMove(schemes.get(random.nextInt(schemes.size())).getMove());
+        computerMove = (Move) scheme.getMoves().stream()
+                .toArray()[random.nextInt(scheme.getMoves().size())];
     }
 
     private Result fight() {
         if (humanMove.equals(computerMove)) {
             return Result.DRAW;
-        } else if (getWinWith(humanMove).contains(computerMove)) {
+        } else if (scheme.getDefeatedMoves(humanMove).contains(computerMove)) {
             return Result.VICTORY;
         }
         return Result.DEFEAT;
@@ -57,43 +50,4 @@ public class Round {
     public Move getComputerMove() {
         return computerMove;
     }
-
-    private void setHumanMove(Move humanMove) {
-        this.humanMove = humanMove;
-    }
-
-    private void setComputerMove(Move computerMove) {
-        this.computerMove = computerMove;
-    }
-
-    private void setResult(Result result) {
-        this.result = result;
-    }
-
-    private Set<Move> getWinWith(Move move) {
-        for (Scheme scheme : schemes) {
-            if (scheme.getMove().equals(move)) {
-                return scheme.getWinWith();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Round round = (Round) o;
-        return Objects.equals(result, round.result) &&
-                humanMove == round.humanMove &&
-                computerMove == round.computerMove &&
-                Objects.equals(schemes, round.schemes);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(result, humanMove, computerMove, schemes);
-    }
-
-
 }

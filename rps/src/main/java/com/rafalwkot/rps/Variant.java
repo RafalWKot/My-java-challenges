@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum Variant {
-    RPS(0),
-    RPSSL(1);
+    RPS(1),
+    RPSSL(2);
 
     private int choice;
 
@@ -17,10 +17,6 @@ public enum Variant {
         return Arrays.stream(values())
                 .filter(variant -> variant.choice == value)
                 .findFirst();
-    }
-
-    public int getChoice() {
-        return choice;
     }
 }
 

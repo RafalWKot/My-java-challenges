@@ -1,55 +1,59 @@
 package com.rafalwkot.rps;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Game {
 
-    List<Configuration> configurations;
+    private TextProvider textProvider;
+    private List<Round> rounds = new ArrayList<>();
+    private int humanPoints;
+    private int computerPoints;
 
-    public Game(List<Configuration> configurations) {
-        this.configurations = configurations;
+    public Game(TextProvider textProvider) {
+        this.textProvider = textProvider;
     }
 
-    public void play() {
-        Variant variant = init();
-        List<Scheme> scheme;
-        if (variant == Variant.RPS) {
-            scheme = configurations.get(0).getPossibleMoves(); //zaczytywanie z mapy
+    public void play(Round round) {
+        rounds.add(round);
+        round.run();
+        addPoint(round.getResult());
+    }
+
+    private void addPoint(Result result) {
+        if (result.equals(Result.VICTORY)) {
+            humanPoints++;
+        } else if (result.equals(Result.DEFEAT)) {
+            computerPoints++;
         } else {
-            scheme = configurations.get(1).getPossibleMoves();
+            humanPoints++;
+            computerPoints++;
         }
-        Duel duel = new Duel(variant, scheme);
-        duel.run();
-        System.out.println(LoadText.getText(Application.GAMEFILE, "#HISTORY"));
-        int historyCondition=  Application.INPUT.nextInt();
-        if(historyCondition == 1) {
-            showHistory(duel);
-        }
-
     }
 
-    private Variant init() {
-        System.out.println(LoadText.getText(Application.GAMEFILE, "#GAME_VARIANT"));
-        IntStream.range(0, configurations.size())
-                .forEach(i -> System.out.println(i + 1 + " " + configurations.get(i).getGameName()));
-        System.out.println(LoadText.getText(Application.GAMEFILE, "#PLAYER_CHOICE"));
-        Variant variant = Variant.valueOf(Application.INPUT.nextInt() - 1).orElseThrow(InputDataException::new);
-        System.out.println("\n" + configurations.get(variant.getChoice()).getDescription());
-
-        return variant;
+    public void showActualResult() {
+        System.out.print(textProvider.getText("CURRENT_RESULT"));
+        System.out.println(Application.PLAYERNAME + " " + humanPoints + " " +
+                "Computer " + computerPoints);
     }
 
-    private void showHistory(Duel duel) {
-        for (int i = 0; i < duel.getRounds().size(); i++) {
-            System.out.println(LoadText.getText(Application.GAMEFILE, "#NO_ROUND") +  i);
-            System.out.print(LoadText.getText(Application.GAMEFILE, "#PLAYER_CHOICE") +
-                            duel.getRounds().get(i).getHumanMove().getText() +
-                            " vs " +
-                            LoadText.getText(Application.GAMEFILE, "#COMPUTER_SYMBOL") +
-                            duel.getRounds().get(i).getComputerMove().getText() +
-                            "\n");
+    public void showHistory() {
+        for (int i = 0; i < rounds.size(); i++) {
+            System.out.println(textProvider.getText("NO_ROUND") + i + " " +
+                    textProvider.getText("PLAYER_CHOICE") +
+                    rounds.get(i).getHumanMove().getText() +
+                    " vs " +
+                    textProvider.getText("COMPUTER_SYMBOL") +
+                    rounds.get(i).getComputerMove().getText() +
+                    "\n");
 
         }
+    }
+
+    public boolean isHumanWin() {
+        if (humanPoints > computerPoints) {
+            return true;
+        }
+        return false;
     }
 }

@@ -1,46 +1,79 @@
 package com.rafalwkot.rps;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Application {
 
-    public static final String RPSTEXTS = "rps_text.txt";
-    public static final String RPSSCHEME = "rps_scheme";
-    public static final String RPSSLTEXTS = "rps_text.txt";
-    public static final String RPSSLSCHEME = "rpssl_scheme";
-    public static final String GAMEFILE ="game_texts.txt";
+    public static final String GAMEFILETEXTS = "game_texts";
     public static String PLAYERNAME;
-    public static Scanner INPUT = new Scanner(System.in);
 
     public static void main(String[] args) {
+        TextProvider textProvider = new FileTextProvider();
 
-        System.out.println(LoadText.getText(GAMEFILE, "#GAME_NAME"));
-        System.out.println(LoadText.getText(GAMEFILE, "#AUTHOR_NAME"));
+        try {
+            textProvider.loadTexts(GAMEFILETEXTS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        System.out.print(LoadText.getText(GAMEFILE, "#ASK_PLAYER_NAME"));
-        PLAYERNAME = INPUT.nextLine();
+        System.out.println(textProvider.getText("GAME_NAME"));
+        System.out.println(textProvider.getText("AUTHOR_NAME"));
+        System.out.print(textProvider.getText("ASK_PLAYER_NAME"));
 
-        System.out.println();
-        System.out.println(LoadText.getText(GAMEFILE, "#INTRODUCE") + " " + PLAYERNAME + "!");
-        System.out.println(LoadText.getText(GAMEFILE, "#BEGINNING"));
+        Scanner input = new Scanner(System.in);
+        PLAYERNAME = input.nextLine();
 
-        List<Configuration> configurations = new ArrayList<>();
-        configurations.add(new Configuration(RPSTEXTS, RPSSCHEME));
-        configurations.add(new Configuration(RPSSLTEXTS, RPSSLSCHEME));
+        System.out.println("\n" + textProvider.getText("INTRODUCE") + " " + PLAYERNAME + "!");
+        System.out.println(textProvider.getText("BEGINNING"));
 
         boolean endGameCondition = true;
         while (endGameCondition) {
-            Game game = new Game(configurations);
-            game.play();
+            System.out.println(textProvider.getText("GAME_VARIANT"));
+            System.out.println(textProvider.getText("RPS_GAME_NAME"));
+            System.out.println(textProvider.getText("RPSSL_GAME_NAME"));
+            System.out.print(textProvider.getText("PLAYER_CHOICE"));
+            Variant variant = Variant.valueOf(input.nextInt()).orElse(Variant.RPS);  //wyjątek
 
-            System.out.println(LoadText.getText(GAMEFILE, "#ASK_FOR_REPLAY"));
-            if (INPUT.nextInt() == 2) {
+            SchemeProvider scheme;
+            if (variant == Variant.RPS) {
+                scheme = new RpsProvider();
+                System.out.println("\n" + textProvider.getText("RPS_ABOUT_BATTLE"));
+            } else {
+                scheme = new RpsslProvider();
+                System.out.println("\n" + textProvider.getText("RPSSL_ABOUT_BATTLE"));
+            }
+
+            System.out.print(textProvider.getText("QUANTITY_ROUNDS"));
+            int numberOfRounds = input.nextInt();
+            Game game = new Game(textProvider);
+
+            for (int i = 0; i < numberOfRounds; i++) {
+                System.out.println("\n" + textProvider.getText("NO_ROUND") + (i + 1));
+                System.out.println(textProvider.getText("SYMBOL"));
+                System.out.println(scheme.keysToString());
+                System.out.print(textProvider.getText("PLAYER_CHOICE"));
+                game.play(new Round(textProvider, scheme, Move.valueOf(input.nextInt()).orElse(Move.ROCK)));  //wyjątek
+                game.showActualResult();
+            }
+
+            if (game.isHumanWin()) {
+                System.out.println(textProvider.getText("CONGRATULATIONS") + "\n");
+            } else {
+                System.out.println(textProvider.getText("DEFEAT") + "\n");
+            }
+
+            System.out.println(textProvider.getText("HISTORY"));
+            System.out.println(textProvider.getText("PLAYER_CHOICE"));
+            if (input.next().equals("1")) {
+                game.showHistory();
+            }
+
+            System.out.println(textProvider.getText("ASK_FOR_REPLAY"));
+            if (!(input.next().equals("1"))) {
                 endGameCondition = false;
             }
         }
-        System.out.println(LoadText.getText(GAMEFILE, "#GOODBYE"));
+        System.out.println(textProvider.getText("GOODBYE"));
     }
 }
 
