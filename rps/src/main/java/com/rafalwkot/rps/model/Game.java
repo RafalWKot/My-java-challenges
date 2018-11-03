@@ -1,4 +1,7 @@
-package com.rafalwkot.rps;
+package com.rafalwkot.rps.model;
+
+import com.rafalwkot.rps.Application;
+import com.rafalwkot.rps.view.TextProvider;
 
 import java.util.ArrayList;
 import java.util.List;

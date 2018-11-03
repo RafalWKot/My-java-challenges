@@ -1,4 +1,4 @@
-package com.rafalwkot.rps;
+package com.rafalwkot.rps.model;
 
 public enum Result {
     VICTORY("Zwycięstwo"),

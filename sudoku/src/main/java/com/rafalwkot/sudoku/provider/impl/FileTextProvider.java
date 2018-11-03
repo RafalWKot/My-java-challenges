@@ -1,4 +1,6 @@
-package com.rafalwkot.rps;
+package com.rafalwkot.sudoku.provider.impl;
+
+import com.rafalwkot.sudoku.provider.TextProvider;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;

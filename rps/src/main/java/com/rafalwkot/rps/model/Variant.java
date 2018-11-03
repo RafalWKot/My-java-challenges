@@ -1,4 +1,4 @@
-package com.rafalwkot.rps;
+package com.rafalwkot.rps.model;
 
 import java.util.Arrays;
 import java.util.Optional;

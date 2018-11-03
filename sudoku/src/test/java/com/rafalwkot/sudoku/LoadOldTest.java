@@ -1,20 +1,17 @@
 package com.rafalwkot.sudoku;
 
+import com.rafalwkot.sudoku.provider.Load_old;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
-
-import static org.junit.Assert.*;
-
-public class LoadTest {
+public class LoadOldTest {
 
     @Test
     public void testGetText() {
         //Given
 
         //When
-        String textName = Load.getText("game_texts.txt", "#GAME_NAME");
+        String textName = Load_old.getText("game_texts.txt", "#GAME_NAME");
 
         //Then
         Assert.assertEquals("Sudoku 1.0", textName);
@@ -25,7 +22,7 @@ public class LoadTest {
         //Given
 
         //When
-        SudokuBoard sudokuBoard = Load.getInitialBoardFromFile("sudoku_example.txt");
+        SudokuBoard sudokuBoard = Load_old.getInitialBoardFromFile("sudoku_example.txt");
 
         //Then
         Assert.assertEquals(8, sudokuBoard.getSudokuRows().get(1).getSudokuElementsInRow().get(8).getValue().longValue());

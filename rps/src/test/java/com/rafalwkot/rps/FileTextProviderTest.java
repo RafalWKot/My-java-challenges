@@ -1,5 +1,7 @@
 package com.rafalwkot.rps;
 
+import com.rafalwkot.rps.view.impl.FileTextProvider;
+import com.rafalwkot.rps.view.TextProvider;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,4 +1,10 @@
-package com.rafalwkot.rps;
+package com.rafalwkot.rps.model;
+
+import com.rafalwkot.rps.Application;
+import com.rafalwkot.rps.model.Move;
+import com.rafalwkot.rps.model.Result;
+import com.rafalwkot.rps.model.SchemeProvider;
+import com.rafalwkot.rps.view.TextProvider;
 
 import java.util.Random;
 
@@ -42,15 +48,15 @@ public class Round {
         return Result.DEFEAT;
     }
 
-    public Result getResult() {
+    Result getResult() {
         return result;
     }
 
-    public Move getHumanMove() {
+    Move getHumanMove() {
         return humanMove;
     }
 
-    public Move getComputerMove() {
+    Move getComputerMove() {
         return computerMove;
     }
 }

@@ -1,4 +1,7 @@
-package com.rafalwkot.sudoku;
+package com.rafalwkot.sudoku.provider;
+
+import com.rafalwkot.sudoku.Application;
+import com.rafalwkot.sudoku.SudokuBoard;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +9,7 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-public class Load {
+public class Load_old {
 
     public static final Scanner INPUT_CONSOLE = new Scanner(System.in);
     private static final String EMPTY = "";

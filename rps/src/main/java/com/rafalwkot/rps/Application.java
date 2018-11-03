@@ -1,5 +1,9 @@
 package com.rafalwkot.rps;
 
+import com.rafalwkot.rps.model.*;
+import com.rafalwkot.rps.view.impl.FileTextProvider;
+import com.rafalwkot.rps.view.TextProvider;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,7 +17,7 @@ public class Application {
 
         try {
             textProvider.loadTexts(GAMEFILETEXTS);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             e.printStackTrace();
         }
 
@@ -33,16 +37,20 @@ public class Application {
             System.out.println(textProvider.getText("RPS_GAME_NAME"));
             System.out.println(textProvider.getText("RPSSL_GAME_NAME"));
             System.out.print(textProvider.getText("PLAYER_CHOICE"));
-            Variant variant = Variant.valueOf(input.nextInt()).orElse(Variant.RPS);
 
-            SchemeProvider scheme;
-            if (variant == Variant.RPS) {
-                scheme = new RpsProvider();
-                System.out.println("\n" + textProvider.getText("RPS_ABOUT_BATTLE"));
-            } else {
-                scheme = new RpsslProvider();
-                System.out.println("\n" + textProvider.getText("RPSSL_ABOUT_BATTLE"));
-            }
+            SchemeProvider scheme = new SchemeProvider(
+                    new SchemeCreator().getScheme(
+                            Variant.valueOf(input.nextInt()).orElseGet(() -> {
+                                System.out.println(textProvider.getText("WRONG_VARIANT"));
+                                return Variant.RPS;
+                            })));
+
+
+//            if (variant == Variant.RPS) {
+//                System.out.println("\n" + textProvider.getText("RPS_ABOUT_BATTLE"));
+//            } else {
+//                System.out.println("\n" + textProvider.getText("RPSSL_ABOUT_BATTLE"));
+//            }
 
             System.out.print(textProvider.getText("QUANTITY_ROUNDS"));
             int numberOfRounds = input.nextInt();

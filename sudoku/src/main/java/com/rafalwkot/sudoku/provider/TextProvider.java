@@ -1,4 +1,4 @@
-package com.rafalwkot.rps;
+package com.rafalwkot.sudoku.provider;
 
 public interface TextProvider {
 

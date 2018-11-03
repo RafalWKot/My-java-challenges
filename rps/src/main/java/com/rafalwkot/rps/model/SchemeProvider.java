@@ -1,13 +1,19 @@
-package com.rafalwkot.rps;
+package com.rafalwkot.rps.model;
+
+import com.rafalwkot.rps.model.Move;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public abstract class SchemeProvider {
+public class SchemeProvider {
 
-    protected EnumMap<Move, EnumSet<Move>> moveWithWin = new EnumMap<>(Move.class);
+    private EnumMap<Move, EnumSet<Move>> moveWithWin;
+
+    public SchemeProvider(EnumMap<Move, EnumSet<Move>> moveWithWin) {
+        this.moveWithWin = moveWithWin;
+    }
 
     public String keysToString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -22,7 +28,7 @@ public abstract class SchemeProvider {
         return stringBuilder.toString();
     }
 
-    public EnumSet getMoves() {
+    public EnumSet<Move> getMoves() { //zwrócić zwykłego seta
         return moveWithWin.entrySet().stream()
                 .map(i -> i.getKey())
                 .collect(Collectors.toCollection(() -> EnumSet.noneOf(Move.class)));

@@ -1,7 +1,7 @@
 package com.rafalwkot.sudoku;
 
+import com.rafalwkot.sudoku.provider.Load_old;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class ValidationTest {
@@ -53,7 +53,7 @@ public class ValidationTest {
     @Test
     public void testValidWholeBoardFromFileCorrect() {
         //Given
-        SudokuBoard sudokuBoard = Load.getInitialBoardFromFile("sudoku_example.txt");
+        SudokuBoard sudokuBoard = Load_old.getInitialBoardFromFile("sudoku_example.txt");
         Validation validation = new Validation(sudokuBoard);
 
         //When
@@ -66,7 +66,7 @@ public class ValidationTest {
     @Test
     public void testValidWholeBoardFromFileIncorrectInColumn() {
         //Given
-        SudokuBoard sudokuBoard = Load.getInitialBoardFromFile("sudoku_example_incorrect_in_column.txt");
+        SudokuBoard sudokuBoard = Load_old.getInitialBoardFromFile("sudoku_example_incorrect_in_column.txt");
         Validation validation = new Validation(sudokuBoard);
 
         //When
@@ -79,7 +79,7 @@ public class ValidationTest {
     @Test
     public void testValidWholeBoardFromFileIncorrectInRow() {
         //Given
-        SudokuBoard sudokuBoard = Load.getInitialBoardFromFile("sudoku_example_incorrect_in_row.txt");
+        SudokuBoard sudokuBoard = Load_old.getInitialBoardFromFile("sudoku_example_incorrect_in_row.txt");
         Validation validation = new Validation(sudokuBoard);
 
         //When
@@ -92,7 +92,7 @@ public class ValidationTest {
     @Test
     public void testValidWholeBoardFromFileIncorrectInSquare() {
         //Given
-        SudokuBoard sudokuBoard = Load.getInitialBoardFromFile("sudoku_example_incorrect_in_square.txt");
+        SudokuBoard sudokuBoard = Load_old.getInitialBoardFromFile("sudoku_example_incorrect_in_square.txt");
         Validation validation = new Validation(sudokuBoard);
 
         //When
