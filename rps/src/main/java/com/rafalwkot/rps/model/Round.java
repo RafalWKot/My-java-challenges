@@ -23,8 +23,7 @@ public class Round {
 
     private Move getRandomMove() {
         Random random = new Random();
-        return (Move) scheme.getMoves().stream()
-                .toArray()[random.nextInt(scheme.getMoves().size())];
+        return (Move) scheme.getMoves().toArray()[random.nextInt(scheme.getMoves().size())];
     }
 
     private Result fight() {

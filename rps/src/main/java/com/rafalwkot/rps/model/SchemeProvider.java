@@ -13,10 +13,9 @@ public class SchemeProvider {
         this.moveWithWin = moveWithWin;
     }
 
-    public EnumSet<Move> getMoves() { //zwrócić zwykłego seta
+    public EnumSet<Move> getMoves() {
         return moveWithWin.entrySet().stream()
                 .map(Map.Entry::getKey)
-                //.map(i -> i.getKey())
                 .collect(Collectors.toCollection(() -> EnumSet.noneOf(Move.class)));
     }
 
