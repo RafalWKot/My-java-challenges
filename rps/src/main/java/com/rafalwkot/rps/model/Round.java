@@ -1,35 +1,23 @@
 package com.rafalwkot.rps.model;
 
-import com.rafalwkot.rps.Application;
-import com.rafalwkot.rps.model.Move;
-import com.rafalwkot.rps.model.Result;
-import com.rafalwkot.rps.model.SchemeProvider;
-import com.rafalwkot.rps.view.TextProvider;
-
 import java.util.Random;
 
 public class Round {
-    private TextProvider textProvider;
     private SchemeProvider scheme;
-    private Result result;
     private Move humanMove;
     private Move computerMove;
 
-    public Round(TextProvider textProvider, SchemeProvider scheme, Move humanMove) {
-        this.textProvider = textProvider;
+    public Round(SchemeProvider scheme, Move humanMove) {
         this.scheme = scheme;
         this.humanMove = humanMove;
     }
 
-    public void run() {
+    Result run() {
         setComputerMove();
-        result = fight();
-        System.out.println(Application.PLAYERNAME + ": " + humanMove.getText() +
-                " " + textProvider.getText("COMPUTER_SYMBOL") + " " + computerMove.getText() +
-                " " + textProvider.getText("RESULT") + result.getText());
+        return fight();
     }
 
-    private void setComputerMove() {  //??
+    private void setComputerMove() {
         computerMove = getRandomMove();
     }
 
@@ -46,10 +34,6 @@ public class Round {
             return Result.VICTORY;
         }
         return Result.DEFEAT;
-    }
-
-    Result getResult() {
-        return result;
     }
 
     Move getHumanMove() {

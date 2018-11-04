@@ -1,14 +1,11 @@
 package com.rafalwkot.rps.model;
 
-import com.rafalwkot.rps.model.Move;
-import com.rafalwkot.rps.model.Variant;
-
 import java.util.EnumMap;
 import java.util.EnumSet;
 
 public class SchemeCreator {
 
-    EnumMap<Move, EnumSet<Move>> getScheme(Variant variant) {
+    public EnumMap<Move, EnumSet<Move>> getScheme(Variant variant) {
 
         EnumMap<Move, EnumSet<Move>> moveWithWin = new EnumMap<>(Move.class);
         if (variant.equals(Variant.RPSSL)) {
