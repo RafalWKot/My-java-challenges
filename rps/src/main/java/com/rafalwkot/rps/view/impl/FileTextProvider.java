@@ -12,15 +12,11 @@ public class FileTextProvider implements TextProvider {
 
     private Map<String, String> texts = new HashMap<>();
 
-    public FileTextProvider(String fileName) {
+    public FileTextProvider(String fileName) throws UnsupportedEncodingException{
         ResourceBundle rb = ResourceBundle.getBundle(fileName);
         Set<String> tags = rb.keySet();
         for (String key : tags) {
-            try {
                 texts.put(key, new String(rb.getString(key).getBytes("ISO-8859-1"), "UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
         }
     }
 
