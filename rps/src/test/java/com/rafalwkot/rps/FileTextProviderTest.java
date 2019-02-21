@@ -5,17 +5,20 @@ import com.rafalwkot.rps.view.TextProvider;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
+
 
 public class FileTextProviderTest {
 
     @Test
     public void testGetText() {
-        TextProvider textProvider = new FileTextProvider();
+        TextProvider textProvider = null;
         try {
-            textProvider.loadTexts("game_texts");
-        } catch (Exception e) {
+            textProvider = new FileTextProvider("game_texts");
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
         //When
         String text = textProvider.getText("AUTHOR_NAME");
         //Then
@@ -24,11 +27,10 @@ public class FileTextProviderTest {
 
     @Test
     public void testLoadTexts() {
-        //Given
-        TextProvider textProvider = new FileTextProvider();
+        TextProvider textProvider = null;
         try {
-            textProvider.loadTexts("game_texts");
-        } catch (Exception e) {
+            textProvider = new FileTextProvider("game_texts");
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         //When

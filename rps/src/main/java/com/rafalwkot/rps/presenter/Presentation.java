@@ -14,7 +14,7 @@ public class Presentation {
         this.view = view;
     }
 
-    public void run() {
+    public void run() { // podzielic na metody
         view.printGameInformation();
         view.setPlayerName();
         view.printPlayerWelcome();

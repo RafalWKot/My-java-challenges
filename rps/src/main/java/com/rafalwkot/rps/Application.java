@@ -1,5 +1,6 @@
 package com.rafalwkot.rps;
 
+import com.rafalwkot.rps.model.LoadTextException;
 import com.rafalwkot.rps.presenter.Presentation;
 import com.rafalwkot.rps.view.TextProvider;
 import com.rafalwkot.rps.view.View;
@@ -19,12 +20,18 @@ public class Application {
             View view = new ConsoleView(textProvider);
             Presentation presentation = new Presentation(view);
             presentation.run();
-        } catch (MissingResourceException e) {
-            System.out.print("Dane aplikacji nie zostały wczytane poprawnie. Brakuje pliku:");
-            System.out.println(GAMEFILETEXTS);
-            System.exit(-1);
-        } catch (UnsupportedEncodingException e) {
-            System.out.println("Złe kodowanie pliku z danymi. Zakoduj w UTF-8.");
+//        } catch (MissingResourceException e) {
+//            System.out.print("Dane aplikacji nie zostały wczytane poprawnie. Brakuje pliku:");
+//            System.out.println(GAMEFILETEXTS);
+//            System.exit(-1);
+//        } catch (UnsupportedEncodingException e) {
+//            System.out.println("Złe kodowanie pliku z danymi. Zakoduj w UTF-8.");
+//            System.exit(-1);
+        } catch (LoadTextException e) { //użyć Loggera
+            System.out.println(e.getMessage());
+            //Logger
+            //Logback
+            //e.printStackTrace();
             System.exit(-1);
         }
     }
